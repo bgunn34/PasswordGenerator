@@ -1,4 +1,5 @@
 import random
+from Password import password 
 
 def set_options():
     # prompts the user to select what chars should be included in the password.
@@ -12,55 +13,62 @@ def set_options():
 
 
 def str_to_bool(s):
-    true_words = ['yes','Yes','YES','true','True','TRUE','yeah','yea','ye']
+    true_words = ['yes','Yes','YES','tr16ue','True','TRUE','yeah','yea','ye']
     if s in true_words:
         return True
     else:
         return False
 
 
-def gen_chars(num,upper,lower,symbols):
-    # accepts booleans saying whether integers, uppercase letters, lowercase letters,
-    # and special characters should be included in the password.
-    #chr() pulls ascii values
-    chars = []
-    if num:
-        nums = [chr(x) for x in range(48,58)]
-        chars = chars + nums
+# def gen_chars(num,upper,lower,symbols):
+#     # accepts booleans saying whether integers, uppercase letters, lowercase letters,
+#     # and special characters should be included in the password.
+#     #chr() pulls ascii values
+#     chars = []
+#     if num:
+#         nums = [chr(x) for x in range(48,58)]
+#         chars = chars + nums
     
-    if upper:
-        uppers = [chr(x) for x in range(65,91)]
-        chars = chars + uppers
+#     if upper:
+#         uppers = [chr(x) for x in range(65,91)]
+#         chars = chars + uppers
 
-    if lower:
-        lowers = [chr(x) for x in range(97,123)]
-        chars = chars + lowers
+#     if lower:
+#         lowers = [chr(x) for x in range(97,123)]
+#         chars = chars + lowers
 
-    if symbols:
-        symb = [chr(x) for x in range(33,48)]
-        symb = symb + [chr(x) for x in range(58,65)]
-        symb = symb + [chr(x) for x in range(91,97)]
-        symb = symb + [chr(x) for x in range(123,127)]
-        chars + symb
+#     if symbols:
+#         symb = [chr(x) for x in range(33,48)]
+#         symb = symb + [chr(x) for x in range(58,65)]
+#         symb = symb + [chr(x) for x in range(91,97)]
+#         symb = symb + [chr(x) for x in range(123,127)]
+#         chars + symb
     
-    return chars
+#     return chars
 
 
-def gen_password(chars, num_chars):
-    # accepts a set of characters and the number to be randomly chosen,
-    # returns a new password string.
-    password = ""
-    while len(password) < num_chars:
-        idx = random.randint(0,len(chars) - 1)
-        password = password + chars[idx]
-    return password
+# def gen_password(chars, num_chars):
+#     # accepts a set of characters and the number to be randomly chosen,
+#     # returns a new password string.
+#     password = ""
+#     while len(password) < num_chars:
+#         idx = random.randint(0,len(chars) - 1)
+#         password = password + chars[idx]
+#     return password
 
 
 def main():
     num, upper, lower, symbols, num_chars = set_options()
-    chars = gen_chars(num,upper,lower,symbols)
-    password = gen_password(chars, num_chars)
-    print("Your Password is " + password)
+    # chars = gen_chars(num,upper,lower,symbols)
+    # password = gen_password(chars, num_chars)
+    pword = password(
+        pass_len=num_chars,
+        num_yn=num,
+        upper_yn=upper,
+        lower_yn=lower,
+        symbols_yn=symbols,
+    )
+    print("Your Password is " + pword.password)
 
 if __name__ == '__main__':
     main()
