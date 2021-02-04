@@ -49,10 +49,13 @@ class password:
 
 
     def check_char_inclusion(self,password):
-        nums_bool = False
-        upper_bool = False
-        lower_bool = False
-        symb_bool = False
+        ## the char category will be checked if the bool is false.
+        ## we only care about categories where the yn var is true
+        ## so we send the inverse.
+        nums_bool = not self.num_yn
+        upper_bool = not self.upper_yn
+        lower_bool = not self.lower_yn
+        symb_bool = not self.symbols_yn
 
         for ch in password:
             if ch in self.nums:
@@ -86,6 +89,6 @@ class password:
         if nums_bool and upper_bool and lower_bool and symb_bool:
             return password
         else:
-            check_char_inclusion(password)
+            self.check_char_inclusion(password)
 
 
